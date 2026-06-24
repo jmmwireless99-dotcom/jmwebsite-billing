@@ -1,0 +1,65 @@
+================================================================================
+  JM BILLING — CLOUDFLARE TUNNEL SETUP (do these steps in your browser)
+================================================================================
+
+I installed cloudflared on this PC at:  C:\Cloudflare\cloudflared.exe
+
+You only need to complete STEPS 1–4 below (about 10 minutes), then run:
+  deploy\2-install-tunnel.bat
+
+--------------------------------------------------------------------------------
+STEP 1 — Add domain to Cloudflare
+--------------------------------------------------------------------------------
+1. Open https://dash.cloudflare.com and sign up / log in
+2. Click "Add a site" → enter your domain (e.g. jmmwireless.com)
+3. Choose the FREE plan
+
+--------------------------------------------------------------------------------
+STEP 2 — Point Hostinger nameservers to Cloudflare
+--------------------------------------------------------------------------------
+1. Cloudflare shows two nameservers (e.g. xxx.ns.cloudflare.com)
+2. In Hostinger: Domains → your domain → Nameservers → Custom
+3. Paste Cloudflare's two nameservers → Save
+4. Wait until Cloudflare shows "Active" (often 15–60 minutes)
+
+--------------------------------------------------------------------------------
+STEP 3 — Create the tunnel
+--------------------------------------------------------------------------------
+1. Open https://one.dash.cloudflare.com
+2. Networks → Tunnels → Create a tunnel
+3. Choose "Cloudflared" → Name: jm-billing → Save
+4. On "Install connector" page, click the copy icon next to the install command
+   It looks like:  cloudflared.exe service install eyJhIjoi...
+5. Copy ONLY the long token after "install " (starts with eyJ...)
+
+--------------------------------------------------------------------------------
+STEP 4 — Add public hostname (in the same tunnel page)
+--------------------------------------------------------------------------------
+1. Tab: Public Hostname → Add a public hostname
+2. Subdomain: billing     (or pay, panel — your choice)
+3. Domain: yourdomain.com
+4. Service type: HTTP
+5. URL: localhost:3000
+6. Save
+
+--------------------------------------------------------------------------------
+STEP 5 — Run on this PC (double-click)
+--------------------------------------------------------------------------------
+1. deploy\2-install-tunnel.bat   → paste your tunnel token when asked
+2. deploy\3-start-all.bat        → starts billing + confirms tunnel
+
+Your site will be:  https://billing.yourdomain.com
+
+--------------------------------------------------------------------------------
+STEP 6 — JM Billing Settings (after login)
+--------------------------------------------------------------------------------
+1. Open https://billing.yourdomain.com
+2. Login admin / admin → CHANGE PASSWORD
+3. Settings → Public URL: https://billing.yourdomain.com
+4. Add MikroTik router IP and test connection
+
+Customer pages:
+  https://billing.yourdomain.com/pay
+  https://billing.yourdomain.com/apply
+
+================================================================================
