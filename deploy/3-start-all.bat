@@ -25,7 +25,7 @@ if errorlevel 1 (
 )
 
 echo   Starting billing panel on http://localhost:3000
-echo   Public URL: check Cloudflare tunnel hostname (e.g. billing.yourdomain.com)
+echo   Public URL: https://billing.jmwifi.pro
 echo.
 echo   Keep this window open. Press Ctrl+C to stop.
 echo.
